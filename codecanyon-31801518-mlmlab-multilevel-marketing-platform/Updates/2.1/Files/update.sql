@@ -1,0 +1,1 @@
+UPDATE `extensions` SET `status` = '0' WHERE `extensions`.`act` = 'google-recaptcha2';
