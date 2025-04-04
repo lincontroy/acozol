@@ -423,16 +423,16 @@ class UserController extends Controller
 
         $phone = $request->phoneNumber;
         $amount=$request->amount;
-        $username="nGcRuk82L34adNA4Xq1C";
-        $password="6hF7G2ELylHPAM1vuKlJlgeLPsaYtguTyP2niVMx";
+        $username="glhItGvlQJC0L94Trz7z";
+        $password="EP5QtoR6mFBGEhv5kDT9hsLsvjgDHMNUSE5uPt5Z";
 
         $payload = [
             "amount" => floatval($amount),
             "phone_number" => $phone,
-            "channel_id" => 1199,
+            "channel_id" => 1969,
             "provider" => "m-pesa",
             "external_reference" => "INV-009",
-            "callback_url" => "https://ebbaymart.com/api/response"
+            "callback_url" => "https://acozolfortune.com/api/response"
         ];
 
 
