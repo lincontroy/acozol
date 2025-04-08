@@ -28,8 +28,8 @@ class Packageselected extends Mailable
 
     public function build()
     {
-        return $this->from('support@ebbaymart.com', 'Ebbaymart')
-                    ->subject('🎉🎉🎉You earned a commision from ebbaymart: ')
+        return $this->from('info@acozolfortune.com', 'Acozol Fortune')
+                    ->subject('🎉🎉🎉You earned a commision from Acozol: ')
                     ->view('emails.package')
                     ->with([
                         'order' => $this->order,

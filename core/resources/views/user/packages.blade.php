@@ -72,12 +72,57 @@
     <div class="container-fluid">
         <div class="row">
             @php
-                $packages = [
-                    ['name' => 'Basic Package', 'price' => '1000', 'features' => ['✅ Affiliates Bonus', '✅ Games', '✅ No Ads Earnings', '✅ No CashBack']],
-                    ['name' => 'PLATINUM Package', 'price' => '2500', 'features' => ['✅ Free Live Support', '✅ BI Weekly Ads Earnings', '✅ 5000 Cashback', '✅ Games']],
-                    ['name' => 'PREMIUM ADS Package', 'price' => '4800', 'features' => ['✅ Free Live Support', '✅ Unlimited Ads Revenue', '✅ Games', '✅ Writing Accounts']],
-                  
-                ];
+            $packages = [
+    [
+        'name' => 'Starter Pack', 
+        'price' => '100', 
+        'features' => [
+            '✅ Access to Free Games', 
+            '✅ Basic Support', 
+            '✅ Limited Earnings'
+        ]
+    ],
+    [
+        'name' => 'Bronze Pack', 
+        'price' => '500', 
+        'features' => [
+            '✅ Games Access', 
+            '✅ Affiliates Bonus', 
+            '✅ Weekly Earnings'
+        ]
+    ],
+    [
+        'name' => 'Silver Pack', 
+        'price' => '1000', 
+        'features' => [
+            '✅ Games Access', 
+            '✅ Affiliates Bonus', 
+            '✅ No Ads', 
+            '✅ Cashback up to 2000'
+        ]
+    ],
+    [
+        'name' => 'Gold Pack', 
+        'price' => '2500', 
+        'features' => [
+            '✅ Free Live Support', 
+            '✅ BI-Weekly Earnings', 
+            '✅ Games Access', 
+            '✅ 5000 Cashback'
+        ]
+    ],
+    [
+        'name' => 'Diamond Pack', 
+        'price' => '5000', 
+        'features' => [
+            '✅ Unlimited Ads Revenue', 
+            '✅ Writing Accounts', 
+            '✅ Premium Support', 
+            '✅ Games & Cashback Access'
+        ]
+    ],
+];
+
             @endphp
 
             @foreach($packages as $package)

@@ -277,23 +277,22 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
                                 
                                 $package=Auth::user()->plan_id;
     
-                                if($package==1){
-                                    $planname="Basic Package";
-                                }else if($package==2){
-                                    $planname="Platinum Package";
-                                }else if($package==3){
-    
-                                    $planname="Premium Ads Package";
-                                }else if($package==4){
-                                    $planname="Premium membership";
-                                }else if($package==5){
-                                    $planname="Money pass";
-                                }else if($package==6){
-                                    $planname="Agent";
-    
-                                }else if($package==0){
-                                    $planname="No package";
+                                if ($package == 1) {
+                                    $planname = "Starter Pack";
+                                } else if ($package == 2) {
+                                    $planname = "Bronze Pack";
+                                } else if ($package == 3) {
+                                    $planname = "Silver Pack";
+                                } else if ($package == 4) {
+                                    $planname = "Gold Pack";
+                                } else if ($package == 5) {
+                                    $planname = "Diamond Pack";
+                                } else if ($package == 6) {
+                                    $planname = "Agent";
+                                } else if ($package == 0) {
+                                    $planname = "No package";
                                 }
+                                
                                 ?>
                                     
                                   {{$planname}}</h2>

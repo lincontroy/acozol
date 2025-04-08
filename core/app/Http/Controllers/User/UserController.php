@@ -591,94 +591,72 @@ class UserController extends Controller
 
         $amount = $request->amount;
 
-        if($plan == 'Basic Package'){
-
-            $plan_id=1;
-
-        }else if( $plan == 'PLATINUM Package'){
-           
-            $plan_id=2;
-        }else if($plan == 'PREMIUM ADS Package'){
-
-            $plan_id=3;
-        }else if($plan == 'PREMIUM Membership'){
-
-            $plan_id=4; 
-
-        }else{
-            $plan_id=5;
+        if ($plan == 'Starter Pack') {
+            $plan_id = 1;
+        } else if ($plan == 'Bronze Pack') {
+            $plan_id = 2;
+        } else if ($plan == 'Silver Pack') {
+            $plan_id = 3;
+        } else if ($plan == 'Gold Pack') {
+            $plan_id = 4;
+        } else if ($plan == 'Diamond Pack') {
+            $plan_id = 5;
+        } else {
+            $plan_id = 0; // Unknown plan
         }
 
         $user_balance=$user->balance;
 
-        if($user_balance>=$amount){
-            //deduct the amount
-
-            $new_user_balance=$user_balance-$amount;
-            $user->balance=$new_user_balance;
-            $user->plan_id=$plan_id;
-           
-            //give the upline a commission
-            $upline=User::where('id',$user->ref_by)->first();
-
-            $upline_balance=$upline->total_ref_com;
-
-           
-
-            
-
-            if($amount=="2500"){
-                $co=2000;
-                $com=$upline_balance+2000;
-                $upline_new_balance=$com;
-            }else{
-                $co=$amount*0.75;
-                $com=$upline_balance+($amount*0.75);
-                $upline_new_balance=$com;
-            }
-
-            $upline->total_ref_com=$upline_new_balance;
-
-            // return $upline_new_balance 
-
-            try{
-                $user->save();
+        if ($user_balance >= $amount) {
+            // Deduct the amount from user
+            $user->balance = $user_balance - $amount;
+            $user->plan_id = $plan_id;
+        
+            // Commission percentages for each upline level (1 to 8)
+            $commissionLevels = [0.20, 0.05, 0.03, 0.02, 0.01, 0.01, 0.01, 0.01];
+        
+            $currentRef = $user->ref_by;
+        
+            foreach ($commissionLevels as $level => $percent) {
+                if (!$currentRef) break;
+        
+                $upline = User::find($currentRef);
+                if (!$upline) break;
+        
+                $commission = intval($amount * $percent);
+                $upline->total_ref_com += $commission;
                 $upline->save();
-
-            }catch(\Exception $e){
-                session()->flash('error', 'An error occurred!');
-                // Redirect back or to another page
-                return redirect()->back();
+        
+                // Prepare data for email
+                $order = [
+                    'username' => $user->username,
+                    'upline_username' => $upline->username,
+                    'amount' => $commission,
+                    'customer_email' => $upline->email,
+                    'level' => $level + 1
+                ];
+        
+                // Send commission email to current upline
+                Mail::to($order['customer_email'])->send(new Packageselected($order));
+        
+                // Move to the next referrer
+                $currentRef = $upline->ref_by;
             }
-
-            
-
-            $order = [
-                'username' => $user->username,
-                'upline_username' => $upline->username,
-                'amount' => $co,
-                'customer_email' => $upline->email
-            ];
-
-
-            //send the email to the user
-
-            Mail::to($order['customer_email'])->send(new Packageselected($order));
-
-            
-
-
-            //add the plan to the user
-            session()->flash('success', 'Package purchased successfully!');
-            // Redirect back or to another page
+        
+            try {
+                $user->save();
+                session()->flash('success', 'Package purchased and commissions distributed successfully!');
+            } catch (\Exception $e) {
+                session()->flash('error', 'An error occurred while saving user data!');
+            }
+        
             return redirect()->back();
-
-
-        }else{
+        } else {
             session()->flash('error', 'User balance insufficient!');
-            // Redirect back or to another page
             return redirect()->back();
         }
+        
+        
 
     }
     public function home()
