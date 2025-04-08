@@ -13,6 +13,15 @@
                     } else {
                         $greeting = 'Good Evening';
                     }
+
+                    $packages = [
+    ['name' => 'Starter Plan', 'price' => '100', 'features' => ['✅ Affiliate Earnings', '✅ Access to Dashboard']],
+    ['name' => 'Bronze Plan', 'price' => '500', 'features' => ['✅ Affiliate Earnings', '✅ Basic Ads Earnings', '✅ Dashboard Access']],
+    ['name' => 'Silver Plan', 'price' => '1000', 'features' => ['✅ Bonus Games', '✅ Ads Earnings', '✅ Priority Support']],
+    ['name' => 'Gold Plan', 'price' => '2500', 'features' => ['✅ Free Live Support', '✅ BI Weekly Ads Earnings', '✅ 5000 Cashback', '✅ Games']],
+    ['name' => 'Platinum Plan', 'price' => '5000', 'features' => ['✅ Unlimited Ads Revenue', '✅ Instant 10,000 Cashback', '✅ Writing Accounts', '✅ Games']],
+    ['name' => 'Elite Plan', 'price' => '10000', 'features' => ['✅ VIP Support', '✅ Unlimited Everything', '✅ 20,000 Cashback', '✅ Business Tools']],
+];
                 @endphp
 
                 @if(Auth::user()->plan_id==0)
@@ -34,18 +43,113 @@
             @endif
 
                 
-                <div class="alert alert-dark border-0 bg-grd-royal alert-dismissible fade show">
-									<div class="d-flex align-items-center">
-										<div class="font-35 text-white"><span class="material-icons-outlined fs-2">lightbulb</span>
-										</div>
-										<div class="ms-3">
-											<h6 class="mb-0 text-white">{{$greeting}}, {{ Auth::user()->username }}</h6>
-											<div class="text-white">Purchase the PLATINUM package at just 2500ksh and receive 5000 cashback, Alternatively choose the PREMIUM ADS for only 4800ksh and get an instant 10,000 cashback directly to your MPESA.</div>
-										</div>
-									</div>
-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-								</div>
+            <div class="alert alert-dark border-0 bg-grd-royal alert-dismissible fade show">
+    <div class="d-flex align-items-start">
+        <div class="font-35 text-white me-3">
+            <span class="material-icons-outlined fs-2">lightbulb</span>
+        </div>
+        <div>
+            <h5 class="mb-1 text-white">{{ $greeting }}, {{ Auth::user()->username }} 👋</h5>
+            <p class="mb-1 text-white">Unlock greater rewards by upgrading your plan today:</p>
+            <ul class="text-white mb-2 ps-3">
+                <li><strong>Gold Plan</strong> – <strong>KES 2,500</strong>: Get <strong>KES 5,000 cashback</strong> and BI-weekly earnings.</li>
+                <li><strong>Platinum Plan</strong> – <strong>KES 5,000</strong>: Earn <strong>KES 10,000 cashback</strong> instantly + unlimited ad revenue.</li>
+                <li><strong>Elite Plan</strong> – <strong>KES 10,000</strong>: Receive <strong>KES 20,000 cashback</strong> with exclusive VIP features.</li>
+            </ul>
+            <p class="mb-0 text-white">Choose your plan and maximize your earnings now 💸</p>
+        </div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
+
+
+
+
+
+<div class="row">
+<div class="col">
+        <div class="card rounded-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <div class="">
+                        <h2 class="mb-0">Ksh {{ number_format(Auth::user()->balance, 2) }}</h2>
+                    </div>
+                    <div class="">
+                        <p
+                            class="dash-lable d-flex align-items-center gap-1 rounded mb-0 bg-success text-success bg-opacity-10">
+                            <span class="material-icons-outlined fs-6">arrow_upward</span>24.7%
+                        </p>
+                    </div>
+                </div>
+                <p class="mb-0">Deposit Balance</p>
+                <div class="mt-4">
+                    <p class="mb-2 d-flex align-items-center justify-content-between">285 left to Goal<span
+                            class="">68%</span></p>
+                    <div class="progress w-100" style="height: 6px;">
+                        <div class="progress-bar bg-grd-purple" style="width: 65%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card rounded-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <div class="">
+                        <h2 class="mb-0">Ksh {{ number_format(Auth::user()->total_ref_com, 2) }}</h2>
+                    </div>
+                    <div class="">
+                        <p
+                            class="dash-lable d-flex align-items-center gap-1 rounded mb-0 bg-success text-success bg-opacity-10">
+                            <span class="material-icons-outlined fs-6">arrow_upward</span>24.7%
+                        </p>
+                    </div>
+                </div>
+                <p class="mb-0">Earning Balance</p>
+                <div class="mt-4">
+                    <p class="mb-2 d-flex align-items-center justify-content-between">285 left to Goal<span
+                            class="">68%</span></p>
+                    <div class="progress w-100" style="height: 6px;">
+                        <div class="progress-bar bg-grd-purple" style="width: 65%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card rounded-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <div class="">
+                        <h2 class="mb-0">Ksh
+                        {{ number_format(App\Models\Withdrawal::where('user_id',Auth::user()->id)->where('withdraw_information', 'LIKE', '%earnings%')->sum('amount'),2) }}</h2>
+                    </div>
+                    <div class="">
+                        <p
+                            class="dash-lable d-flex align-items-center gap-1 rounded mb-0 bg-danger text-danger bg-opacity-10">
+                            <span class="material-icons-outlined fs-6">arrow_upward</span>18.6%
+                        </p>
+                    </div>
+                </div>
+                <p class="mb-0">Withdrawals</p>
+                <div class="mt-4">
+                    <p class="mb-2 d-flex align-items-center justify-content-between">285 left to Goal<span
+                            class="">78%</span></p>
+                    <div class="progress w-100" style="height: 6px;">
+                        <div class="progress-bar bg-grd-danger" style="width: 65%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+</div>
 
 <div class="row">
     <div class="col">
@@ -122,7 +226,29 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
             <div class="card-body">
                 <div class="d-flex align-items-center gap-3 mb-2">
                     <div class="">
-                        <h2 class="mb-0">Ksh {{ number_format(Auth::user()->balance, 2) }}</h2>
+                        <h2 class="mb-0">  <?php
+                                
+                                $package=Auth::user()->plan_id;
+    
+                                if ($package == 1) {
+                                    $planname = "Starter Pack";
+                                } else if ($package == 2) {
+                                    $planname = "Bronze Pack";
+                                } else if ($package == 3) {
+                                    $planname = "Silver Pack";
+                                } else if ($package == 4) {
+                                    $planname = "Gold Pack";
+                                } else if ($package == 5) {
+                                    $planname = "Diamond Pack";
+                                } else if ($package == 6) {
+                                    $planname = "Agent";
+                                } else if ($package == 0) {
+                                    $planname = "No package";
+                                }
+                                
+                                ?>
+                                    
+                                  {{$planname}}</h2>
                     </div>
                     <div class="">
                         <p
@@ -131,7 +257,7 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
                         </p>
                     </div>
                 </div>
-                <p class="mb-0">Deposit Balance</p>
+                <p class="mb-0">Active Package</p>
                 <div class="mt-4">
                     <p class="mb-2 d-flex align-items-center justify-content-between">285 left to Goal<span
                             class="">68%</span></p>
@@ -143,6 +269,12 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
             </div>
         </div>
     </div>
+  
+
+    
+</div>
+
+<div class="row">
     <div class="col">
         <div class="card rounded-4">
             <div class="card-body">
@@ -209,117 +341,6 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
     
 </div>
 
-<div class="row">
-    <div class="col">
-        <div class="card rounded-4">
-            <div class="card-body">
-                <div class="d-flex align-items-center gap-3 mb-2">
-                    <div class="">
-                        <h2 class="mb-0">Ksh {{ number_format(Auth::user()->total_ref_com, 2) }}</h2>
-                    </div>
-                    <div class="">
-                        <p
-                            class="dash-lable d-flex align-items-center gap-1 rounded mb-0 bg-success text-success bg-opacity-10">
-                            <span class="material-icons-outlined fs-6">arrow_upward</span>24.7%
-                        </p>
-                    </div>
-                </div>
-                <p class="mb-0">Earning Balance</p>
-                <div class="mt-4">
-                    <p class="mb-2 d-flex align-items-center justify-content-between">285 left to Goal<span
-                            class="">68%</span></p>
-                    <div class="progress w-100" style="height: 6px;">
-                        <div class="progress-bar bg-grd-purple" style="width: 65%"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card rounded-4">
-            <div class="card-body">
-                <div class="d-flex align-items-center gap-3 mb-2">
-                    <div class="">
-                        <h2 class="mb-0">Ksh
-                        {{ number_format(App\Models\Withdrawal::where('user_id',Auth::user()->id)->where('withdraw_information', 'LIKE', '%earnings%')->sum('amount'),2) }}</h2>
-                    </div>
-                    <div class="">
-                        <p
-                            class="dash-lable d-flex align-items-center gap-1 rounded mb-0 bg-danger text-danger bg-opacity-10">
-                            <span class="material-icons-outlined fs-6">arrow_upward</span>18.6%
-                        </p>
-                    </div>
-                </div>
-                <p class="mb-0">Withdrawals</p>
-                <div class="mt-4">
-                    <p class="mb-2 d-flex align-items-center justify-content-between">285 left to Goal<span
-                            class="">78%</span></p>
-                    <div class="progress w-100" style="height: 6px;">
-                        <div class="progress-bar bg-grd-danger" style="width: 65%"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    
-</div>
-
-<div class="row">
-    <div class="col">
-        <div class="card rounded-4">
-            <div class="card-body">
-                <div class="d-flex align-items-center gap-3 mb-2">
-                    <div class="">
-                        <h2 class="mb-0">  <?php
-                                
-                                $package=Auth::user()->plan_id;
-    
-                                if ($package == 1) {
-                                    $planname = "Starter Pack";
-                                } else if ($package == 2) {
-                                    $planname = "Bronze Pack";
-                                } else if ($package == 3) {
-                                    $planname = "Silver Pack";
-                                } else if ($package == 4) {
-                                    $planname = "Gold Pack";
-                                } else if ($package == 5) {
-                                    $planname = "Diamond Pack";
-                                } else if ($package == 6) {
-                                    $planname = "Agent";
-                                } else if ($package == 0) {
-                                    $planname = "No package";
-                                }
-                                
-                                ?>
-                                    
-                                  {{$planname}}</h2>
-                    </div>
-                    <div class="">
-                        <p
-                            class="dash-lable d-flex align-items-center gap-1 rounded mb-0 bg-success text-success bg-opacity-10">
-                            <span class="material-icons-outlined fs-6">arrow_upward</span>24.7%
-                        </p>
-                    </div>
-                </div>
-                <p class="mb-0">Active Package</p>
-                <div class="mt-4">
-                    <p class="mb-2 d-flex align-items-center justify-content-between">285 left to Goal<span
-                            class="">68%</span></p>
-                    <div class="progress w-100" style="height: 6px;">
-                        <div class="progress-bar bg-grd-purple" style="width: 65%"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-  
-
-    
-</div>
 
 
 <script>

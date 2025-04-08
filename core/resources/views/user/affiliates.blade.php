@@ -52,10 +52,15 @@
                         <?php
                         $status = ($aff->plan_id == 0) ? "Not active" : "Active";
                         $plan_name = match ($aff->plan_id) {
-                            1 => "Basic Package",
-                            2 => "Premium Package",
+                            1 => "Starter Plan",
+                            2 => "Bronze Plan",
+                            3 => "Silver Plan",
+                            4 => "Gold Plan",
+                            5 => "Platinum Plan",
+                            6 => "Elite Plan",
                             default => "Unknown Package",
                         };
+                        
                         ?>
                         
                         <td><span class="badge {{ $status == 'Active' ? 'bg-success' : 'bg-warning text-dark' }}">{{ $status }}</span></td>
