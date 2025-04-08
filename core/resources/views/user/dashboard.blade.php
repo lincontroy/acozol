@@ -167,7 +167,7 @@ Ksh {{ number_format($total_ads, 2) }}</h2>
                         </p>
                     </div>
                 </div>
-                <p class="mb-0">Ebbay Points</p>
+                <p class="mb-0">Acozol Points</p>
                 <div class="mt-4">
                     <p class="mb-2 d-flex align-items-center justify-content-between">Get to 2000 points to unlock Earning via academic writing<span
                             class="">68%</span></p>
