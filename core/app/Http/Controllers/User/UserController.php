@@ -613,7 +613,7 @@ class UserController extends Controller
             $user->plan_id = $plan_id;
         
             // Commission percentages for each upline level (1 to 8)
-            $commissionLevels = [0.20, 0.05, 0.03, 0.02, 0.01, 0.01, 0.01, 0.01];
+            $commissionLevels = [0.30, 0.05, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00];
         
             $currentRef = $user->ref_by;
         
