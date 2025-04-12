@@ -298,7 +298,7 @@ class UserController extends Controller
 
         $amount=$request->amount;
 
-        if($amount<=1000){
+        if($amount<=500){
 
             session()->flash('error', 'Minimum withdrawal is 1000');
                 // Redirect back or to another page
