@@ -726,12 +726,7 @@
                 </a>
             </li>
 
-            <li>
-                <a href="{{ url('user/addons') }}">
-                    <div class="parent-icon"><i class="material-icons-outlined">extension</i></div>
-                    <div class="menu-title">Addons</div>
-                </a>
-            </li>
+           
 
             <li>
                 <a href="{{ url('user/affiliates') }}">
@@ -747,13 +742,7 @@
                 </a>
             </li>
 
-            <li>
-                <a href="{{ url('user/transfer') }}">
-                    <div class="parent-icon"><i class="material-icons-outlined">swap_horiz</i></div>
-                    <div class="menu-title">Transfer funds</div>
-                </a>
-            </li>
-
+            
             <li>
                 <a href="{{ url('user/jobpostings') }}">
                     <div class="parent-icon"><i class="material-icons-outlined">work</i>
